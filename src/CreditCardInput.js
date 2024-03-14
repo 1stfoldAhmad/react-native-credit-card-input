@@ -10,7 +10,7 @@ import ReactNative, {
   TextInput,
 } from "react-native";
 
-import { ViewPropTypes } from 'deprecated-react-native-prop-types';
+import { ViewPropTypes } from "deprecated-react-native-prop-types";
 
 
 import CreditCard from "./CardView";
