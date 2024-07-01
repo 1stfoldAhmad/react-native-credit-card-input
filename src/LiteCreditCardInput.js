@@ -72,7 +72,7 @@ export default class LiteCreditCardInput extends Component {
 
     placeholders: PropTypes.object,
 
-    inputStyle: Text.propTypes.style,
+    inputStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 
     validColor: PropTypes.string,
     invalidColor: PropTypes.string,
