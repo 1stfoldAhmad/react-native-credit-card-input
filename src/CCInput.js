@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { ViewPropTypes } from "deprecated-react-native-prop-types";
 
-
 const s = StyleSheet.create({
   baseInputStyle: {
     color: "black",
@@ -54,18 +53,18 @@ export default class CCInput extends Component {
     additionalInputProps: {},
   };
 
-  componentWillReceiveProps = newProps => {
+  componentWillReceiveProps(newProps) {
     const { status, value, onBecomeEmpty, onBecomeValid, field } = this.props;
     const { status: newStatus, value: newValue } = newProps;
 
     if (value !== "" && newValue === "") onBecomeEmpty(field);
     if (status !== "valid" && newStatus === "valid") onBecomeValid(field);
-  };
+  }
 
-  focus = () => this.refs.input.focus();
+  focus = () => this.input.focus();
 
   _onFocus = () => this.props.onFocus(this.props.field);
-  _onChange = value => this.props.onChange(this.props.field, value);
+  _onChange = (value) => this.props.onChange(this.props.field, value);
 
   render() {
     const { label, value, placeholder, status, keyboardType,
@@ -73,28 +72,29 @@ export default class CCInput extends Component {
             validColor, invalidColor, placeholderColor,
             additionalInputProps } = this.props;
     return (
-      <TouchableOpacity onPress={this.focus}
-        activeOpacity={0.99}>
+      <TouchableOpacity onPress={this.focus} activeOpacity={0.99}>
         <View style={[containerStyle]}>
-          { !!label && <Text style={[labelStyle]}>{label}</Text>}
-          <TextInput ref="input"
+          {!!label && <Text style={[labelStyle]}>{label}</Text>}
+          <TextInput
+            ref={(input) => (this.input = input)}
             {...additionalInputProps}
             keyboardType={keyboardType}
-            autoCapitalise="words"
+            autoCapitalize="words"
             autoCorrect={false}
             style={[
               s.baseInputStyle,
               inputStyle,
-              ((validColor && status === "valid") ? { color: validColor } :
-              (invalidColor && status === "invalid") ? { color: invalidColor } :
-              {}),
+              validColor && status === "valid" ? { color: validColor } :
+              invalidColor && status === "invalid" ? { color: invalidColor } :
+              {},
             ]}
-            underlineColorAndroid={"transparent"}
+            underlineColorAndroid="transparent"
             placeholderTextColor={placeholderColor}
             placeholder={placeholder}
             value={value}
             onFocus={this._onFocus}
-            onChangeText={this._onChange} />
+            onChangeText={this._onChange}
+          />
         </View>
       </TouchableOpacity>
     );
