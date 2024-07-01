@@ -26,8 +26,8 @@ export default class CCInput extends Component {
     status: PropTypes.oneOf(["valid", "invalid", "incomplete"]),
 
     containerStyle: ViewPropTypes.style,
-    inputStyle: Text.propTypes.style,
-    labelStyle: Text.propTypes.style,
+    inputStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    labelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     validColor: PropTypes.string,
     invalidColor: PropTypes.string,
     placeholderColor: PropTypes.string,
